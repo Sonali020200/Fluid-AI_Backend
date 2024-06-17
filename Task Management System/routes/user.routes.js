@@ -47,7 +47,8 @@ userRouter.post("/login", async (req, res) => {
 		if (user) {
 			bcrypt.compare(password, user.password, (err, result) => {
 				if (result) {
-					res.status(200).json({ msg: "Login Successful!", token: jwt.sign({ userId: user._id, name: user.name }, process.env.Key) });
+					const token = jwt.sign({ userId: user._id, name: user.name }, process.env.Key, { expiresIn: '7d' });
+					res.status(200).json({ msg: "Login Successful!", token });
 				} else {
 					res.status(400).json({ msg: "Password does not match" });
 				}
