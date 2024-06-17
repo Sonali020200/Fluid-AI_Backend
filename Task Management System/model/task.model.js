@@ -26,7 +26,9 @@ const taskSchema = mongoose.Schema({
     versionKey: false
 })
 
+
 const TaskModel = mongoose.model("task", taskSchema)
+
 
 module.exports = {
     TaskModel
