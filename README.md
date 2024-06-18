@@ -6,13 +6,13 @@ Welcome to the Task Management System project. Our application simplifies task m
 ## Contents
 - [Technology Stack](#technology-stack)
 - [Objective](#objective)
-- [Requirements](#requirements)
+- [Deployed Link](#deployed-link)
+- [API Documentation](#api-documentation)
 - [API Endpoints](#api-endpoints)
   - [Users](#users)
   - [Tasks](#tasks)
 - [Technical Considerations](#technical-considerations)
 - [Getting Started](#getting-started)
-- [Deployed Link](#deployed-link)
 
 
 ## Technology Stack
@@ -23,17 +23,29 @@ Welcome to the Task Management System project. Our application simplifies task m
 - Unit Test: Used for ensuring the functionality of the code through automated testing.
   - Jest: A delightful JavaScript Testing Framework with a focus on simplicity.
   - Supertest: A Super-agent driven library for testing node.js HTTP servers using a fluent API.
+- Swagger: Used swagger UI to interact with the API endpoints directly.  
 
 
 ## Objective
 
 The objective of this project is to develop a RESTful API that allows users to perform CRUD operations (Create, Read, Update, Delete) on tasks for a task management system.
 
-## Requirements
 
-### Task Model
+## Deployed link
 
-Defined a MongoDB schema for tasks with fields such as title, description, due date, priority, status, etc.
+https://fluid-ai-backend.onrender.com
+
+
+## API Documentation
+
+The API uses Swagger for documentation. Once the server is running, you can access the Swagger UI to explore the API endpoints at:
+
+```bash
+
+http://localhost:8080/api-docs
+
+```
+
 
 ## API Endpoints
 
@@ -271,11 +283,10 @@ id: Task ID
     Key= <your_jwt_secret_key>
 
 4. **Start the server:**
-
+  ```bash
     `npm run server`
+    ```
 
-## Deployed link
 
-https://fluid-ai-backend.onrender.com
 
 
