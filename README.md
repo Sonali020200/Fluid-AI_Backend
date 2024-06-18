@@ -3,11 +3,26 @@
 Welcome to the Task Management System project. Our application simplifies task management, empowering users to efficiently organize their daily tasks with ease. By providing functionalities for task creation, retrieval, updating, and deletion, users can seamlessly manage their tasks after registering and logging in, ensuring a personalized and secure experience based on their authentication credentials.
 
 
+## Contents
+- [Technology Stack](#technology-stack)
+- [Objective](#objective)
+- [Requirements](#requirements)
+- [API Endpoints](#api-endpoints)
+  - [Users](#users)
+  - [Tasks](#tasks)
+- [Technical Considerations](#technical-considerations)
+- [Getting Started](#getting-started)
+- [Deployed Link](#deployed-link)
+
+
 ## Technology Stack
 
 - Node.js: A powerful JavaScript runtime environment for building server-side applications.
 - Express.js: A minimalist web framework for Node.js that simplifies building APIs and web applications.
 - MongoDB: A flexible NoSQL database system for storing and managing task data.
+- Unit Test: Used for ensuring the functionality of the code through automated testing.
+  - Jest: A delightful JavaScript Testing Framework with a focus on simplicity.
+  - Supertest: A Super-agent driven library for testing node.js HTTP servers using a fluent API.
 
 
 ## Objective
@@ -229,6 +244,7 @@ id: Task ID
 - Used Node.js with Express.js for building the RESTful API.
 - Used MongoDB as the database for storing tasks.
 - Implemented JWT-based authentication for securing the API endpoints.
+- Implemented Unit Tests for ensuring the functionality of the code through automated testing.
 
 
 ## Getting Started
