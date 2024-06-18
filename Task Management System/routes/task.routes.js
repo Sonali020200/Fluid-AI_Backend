@@ -1,12 +1,57 @@
+
 const express = require("express");
 const { TaskModel } = require("../model/task.model");
-const { auth } = require("../middlewares/auth.middlewares")
-
+const { auth } = require("../middlewares/auth.middlewares");
 
 const taskRouter = express.Router();
 
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Task:
+ *       type: object
+ *       required:
+ *         - title
+ *         - description
+ *         - priority
+ *         - status
+ *       properties:
+ *         title:
+ *           type: string
+ *         description:
+ *           type: string
+ *         priority:
+ *           type: string
+ *         status:
+ *           type: string
+ *   securitySchemes:
+ *     bearerAuth:
+ *       type: http
+ *       scheme: bearer
+ *       bearerFormat: JWT
+ * security:
+ *   - bearerAuth: []
+ */
 
-// create a new task
+/**
+ * @swagger
+ * /task:
+ *   post:
+ *     summary: Create a new task
+ *     tags: [Task]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Task'
+ *     responses:
+ *       200:
+ *         description: Task is created Successfully!
+ */
 
 taskRouter.post("/", auth, async (req, res) => {
     const payload = req.body;
@@ -18,27 +63,55 @@ taskRouter.post("/", auth, async (req, res) => {
         });
         await task.save();
         res.status(200).json({ msg: "Task is created Successfully!" });
-    }
-    catch (err) {
+    } catch (err) {
         res.status(400).json({ msg: err });
     }
 });
 
-// get all tasks 
+/**
+ * @swagger
+ * /task:
+ *   get:
+ *     summary: Get all tasks for the authenticated user
+ *     tags: [Task]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: List of tasks
+ */
 
 taskRouter.get("/", auth, async (req, res) => {
     const userId = req.id;
     try {
         const tasks = await TaskModel.find({ userId });
         res.status(200).json(tasks);
-    }
-    catch (err) {
+    } catch (err) {
         res.status(400).json({ msg: err });
     }
 });
 
-
-// get particular task with id
+/**
+ * @swagger
+ * /task/{id}:
+ *   get:
+ *     summary: Get a particular task by ID for the authenticated user
+ *     tags: [Task]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: Task ID
+ *     responses:
+ *       200:
+ *         description: Task data
+ *       400:
+ *         description: You are not allowed to access
+ */
 
 taskRouter.get("/:_id", auth, async (req, res) => {
     const id = req.id;
@@ -48,19 +121,41 @@ taskRouter.get("/:_id", auth, async (req, res) => {
         const { userId } = tasks;
         if (userId.toString() == id) {
             res.status(200).json(tasks);
-        }
-        else {
+        } else {
             res.status(400).json({ msg: "You are not allowed to access" });
         }
-
-    }
-    catch (err) {
+    } catch (err) {
         res.status(400).json({ msg: err });
     }
 });
 
-
-// update tasks
+/**
+ * @swagger
+ * /task/{id}:
+ *   patch:
+ *     summary: Update a particular task by ID for the authenticated user
+ *     tags: [Task]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: Task ID
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Task'
+ *     responses:
+ *       200:
+ *         description: Tasks has been updated
+ *       400:
+ *         description: You are not authorized to update other tasks
+ */
 
 taskRouter.patch("/:_id", auth, async (req, res) => {
     const { _id } = req.params;
@@ -72,44 +167,53 @@ taskRouter.patch("/:_id", auth, async (req, res) => {
         if (userId.toString() == id) {
             await TaskModel.findByIdAndUpdate(_id, payload, { new: true });
             res.status(200).json({ msg: "Tasks has been updated" });
-        }
-        else {
+        } else {
             res.status(400).json({ msg: "You are not authorized to update other tasks" });
         }
-    }
-
-    catch (err) {
+    } catch (err) {
         res.status(400).json({ msg: err });
     }
 });
 
-
-// delete task
+/**
+ * @swagger
+ * /task/{id}:
+ *   delete:
+ *     summary: Delete a particular task by ID for the authenticated user
+ *     tags: [Task]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: Task ID
+ *     responses:
+ *       200:
+ *         description: Tasks has been deleted
+ *       400:
+ *         description: You are not authorized to delete other tasks
+ */
 
 taskRouter.delete("/:_id", auth, async (req, res) => {
     const { _id } = req.params;
     const id = req.id;
     try {
         const task = await TaskModel.findOne({ _id });
-        console.log(task);
         const { userId } = task;
-        console.log(userId, id);
         if (userId.toString() == id) {
-            const tasks = await TaskModel.findByIdAndDelete(_id, { new: true });
+            await TaskModel.findByIdAndDelete(_id);
             res.status(200).json({ msg: "Tasks has been deleted" });
-        }
-        else {
+        } else {
             res.status(400).json({ msg: "You are not authorized to delete other tasks" });
         }
-    }
-
-    catch (err) {
+    } catch (err) {
         res.status(400).json({ msg: err });
     }
 });
 
-
-
 module.exports = {
     taskRouter
-}
+};

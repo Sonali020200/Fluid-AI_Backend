@@ -10,7 +10,7 @@ let taskId;
 
 beforeAll(async () => {
     await connection;
-    server = app.listen(8888); 
+    server = app.listen(5005); 
     await UserModel.deleteMany({});
     await TaskModel.deleteMany({});
 
