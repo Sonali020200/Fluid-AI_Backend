@@ -44,6 +44,8 @@ The API uses Swagger for documentation. Once the server is running, you can acce
 https://fluid-ai-backend.onrender.com/api-docs/
 
 
+http://localhost:8080/api-docs
+
 
 
 ## API Endpoints
