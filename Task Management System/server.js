@@ -1,8 +1,11 @@
 
 const { app, connection } = require('./index');
 require('dotenv').config();
+const cors = require('cors');
 
 const port = process.env.PORT || 3000;
+
+app.use(cors());
 
 const server = app.listen(port, async () => {
     try {
