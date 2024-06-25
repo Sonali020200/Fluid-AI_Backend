@@ -11,8 +11,12 @@ const options = {
         },
         servers: [
             {
+                url: 'https://fluid-ai-backend.onrender.com/',
+                description: 'Development server deployed'
+            },
+            {
                 url: 'http://localhost:8080',
-                description: 'Development server'
+                description: 'Development server localhost'
             }
         ],
         components: {
