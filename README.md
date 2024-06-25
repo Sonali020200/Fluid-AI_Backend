@@ -267,14 +267,14 @@ id: Task ID
 1. **Clone this repository:**
 
    ```bash
-   `git clone https://github.com/Sonali020200/Fluid-AI_Backend.git`
+   git clone https://github.com/Sonali020200/Fluid-AI_Backend.git
     
-    `cd task-management-system`
+    cd task-management-system
 
    ```
 2. **Install the dependencies:**
    ```bash
-    `npm install`
+    npm install
    ```
   
 3. **Create a .env file in the root directory and add the following environment variables:**  
@@ -286,14 +286,14 @@ id: Task ID
 4. **Start the server:**
   ```bash
 
-    `npm run server`
+    npm run server
 
   ```
 
 5. **Run testcases:**
   ```bash
 
-  `npm test`
+  npm test
 
   ```
 
