@@ -285,8 +285,17 @@ id: Task ID
 
 4. **Start the server:**
   ```bash
+
     `npm run server`
+
     ```
+
+5. **Run testcases:**
+  ```bash
+
+  `npm test`
+
+  ```
 
 
 
